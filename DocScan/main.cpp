@@ -144,7 +144,6 @@ void drawPoints(vector<Point> points, Scalar color) {
 }
 
 vector<Point> reorderPoints() {
-    
     vector<Point> newPoints;
     int pCount = sizeof(initialPoints) / sizeof(initialPoints[0]);
     if (pCount < 3) { return {}; }
