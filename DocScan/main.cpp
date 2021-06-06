@@ -55,25 +55,22 @@ int main() {
         
         // get contours
         initialPoints = getContours(imgThre);
-        docPoints = reorderPoints();
-        
+        if (initialPoints.size() > 0) docPoints = reorderPoints();
         
         // warp img
-        warpImg(imgOrj, docPoints, targetWidth, targetHeight);
+        if (docPoints.size() > 0) warpImg(imgOrj, docPoints, targetWidth, targetHeight);
         
         // crop
         int cropVal = 5;
         Rect cropRect(cropVal,cropVal,targetWidth-(2*cropVal), targetHeight-(2*cropVal));
-        imgCropped = imgWarped(cropRect);
+        if (docPoints.size() > 0) imgCropped = imgWarped(cropRect);
         
         // draw on the orj
         drawPoints(docPoints, Scalar(0,0,255));
         
         // show
         imshow("DocScan", imgOrj);
-        imshow("DocScan Result", imgCropped);
-
-        // imshow("DocScan Post-Process Stream", imgThre);
+        if (docPoints.size() > 0) imshow("DocScan Result", imgCropped);
         
         waitKey(1);
     }
